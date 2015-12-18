@@ -1,7 +1,3 @@
-This is a pre-release Caffe branch for fully convolutional networks. This includes unmerged PRs and no guarantees.
+This is a preliminary code release of the Multiscale Deep Semantic Boundary Detector.
 
-Everything here is subject to change, including the history of this branch.
-
-Consider PR #2016 for reducing memory usage.
-
-See `future.sh` for details.
+Instructions on how to use the code will follow...
