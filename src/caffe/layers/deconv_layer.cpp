@@ -1,5 +1,5 @@
 #include <vector>
-
+//#include <iostream>
 #include "caffe/filler.hpp"
 #include "caffe/layer.hpp"
 #include "caffe/util/im2col.hpp"
@@ -10,10 +10,11 @@ namespace caffe {
 
 template <typename Dtype>
 void DeconvolutionLayer<Dtype>::compute_output_shape() {
-  this->height_out_ = this->stride_h_ * (this->height_ - 1) + this->kernel_h_
-      - 2 * this->pad_h_;
-  this->width_out_ = this->stride_w_ * (this->width_ - 1) + this->kernel_w_
-      - 2 * this->pad_w_;
+  this->height_out_ = int(this->stride_h_ * (this->height_ - 1) + this->kernel_h_
+      - 2 * this->pad_h_);
+  this->width_out_ = int(this->stride_w_ * (this->width_ - 1) + this->kernel_w_
+      - 2 * this->pad_w_);
+  //std::cout << this->height_out_ << " " << this->width_out_ << std::endl;
 }
 
 template <typename Dtype>
