@@ -2,6 +2,7 @@
 #include <map>
 #include <set>
 #include <vector>
+//#include <iostream>
 
 #include "caffe/layer.hpp"
 #include "caffe/net.hpp"
@@ -52,15 +53,20 @@ void CropLayer<Dtype>::LayerSetUp(const vector<Blob<Dtype>*>& bottom,
   vector<DiagonalAffineMap<Dtype> > coord_maps(2,
       DiagonalAffineMap<Dtype>::identity(2));
   for (int i = 0; i < 2; ++i) {
+    //int c = 0;
     for (Blob<Dtype>* blob = bottom[i]; blob != inter_blob;
          blob = this->net_->bottom_vecs()[down_map[blob]][0]) {
       shared_ptr<Layer<Dtype> > layer = this->net_->layers()[down_map[blob]];
+      //std::cout << c << " "  << layer->coord_map().coefs()[0].first << layer->coord_map().coefs()[1].first << std::endl;
       coord_maps[i] = coord_maps[i].compose(layer->coord_map());
+      //std::cout << c << " " << coord_maps[i].coefs()[0].first << coord_maps[i].coefs()[1].first << std::endl;
+      //c++;
     }
   }
   // Compute the mapping from first bottom coordinates to second.
   DiagonalAffineMap<Dtype> crop_map =
       coord_maps[1].compose(coord_maps[0].inv());
+  //std::cout << crop_map.coefs()[1].first << std::endl;
   for (int i = 0; i < 2; ++i) {
     // Check for scale mismatch (unfortunately, CHECK_DOUBLE_EQ does not
     // support a message like the other CHECKs).
