@@ -12,8 +12,8 @@ void im2col_cpu(const Dtype* data_im, const int channels,
 template <typename Dtype>
 void col2im_cpu(const Dtype* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
-    const int pad_h, const int pad_w, const int stride_h,
-    const int stride_w, Dtype* data_im);
+    const int pad_h, const int pad_w, const float stride_h,
+    const float stride_w, Dtype* data_im);
 
 template <typename Dtype>
 void im2col_gpu(const Dtype* data_im, const int channels,
@@ -24,8 +24,8 @@ void im2col_gpu(const Dtype* data_im, const int channels,
 template <typename Dtype>
 void col2im_gpu(const Dtype* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
-    const int pad_h, const int pad_w, const int stride_h,
-    const int stride_w, Dtype* data_im);
+    const int pad_h, const int pad_w, const float stride_h,
+    const float stride_w, Dtype* data_im);
 
 }  // namespace caffe
 

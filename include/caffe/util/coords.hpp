@@ -47,7 +47,7 @@ class DiagonalAffineMap {
 
 template <typename Dtype>
 DiagonalAffineMap<Dtype> FilterMap(const int kernel_h, const int kernel_w,
-    const int stride_h, const int stride_w, const int pad_h, const int pad_w) {
+    const float stride_h, const float stride_w, const int pad_h, const int pad_w) {
   vector<pair<Dtype, Dtype> > coefs;
   coefs.push_back(make_pair(stride_h,
         static_cast<Dtype>(kernel_h - 1) / 2 - pad_h));

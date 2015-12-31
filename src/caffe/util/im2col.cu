@@ -115,10 +115,10 @@ __global__ void col2im_gpu_kernel(const int n, const Dtype* data_col,
 template <typename Dtype>
 void col2im_gpu(const Dtype* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
-    const int pad_h, const int pad_w, const int stride_h,
-    const int stride_w, Dtype* data_im) {
-  int height_col = (height + 2 * pad_h - patch_h) / stride_h + 1;
-  int width_col = (width + 2 * pad_w - patch_w) / stride_w + 1;
+    const int pad_h, const int pad_w, const float stride_h,
+    const float stride_w, Dtype* data_im) {
+  int height_col = int((height + 2 * pad_h - patch_h) / stride_h) + 1;
+  int width_col = int((width + 2 * pad_w - patch_w) / stride_w) + 1;
   int num_kernels = channels * height * width;
   // To avoid involving atomic operations, we will launch one kernel per
   // bottom dimension, and then in the kernel add up the top dimensions.
@@ -134,11 +134,11 @@ void col2im_gpu(const Dtype* data_col, const int channels,
 // Explicit instantiation
 template void col2im_gpu<float>(const float* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
-    const int pad_h, const int pad_w, const int stride_h,
-    const int stride_w, float* data_im);
+    const int pad_h, const int pad_w, const float stride_h,
+    const float stride_w, float* data_im);
 template void col2im_gpu<double>(const double* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
-    const int pad_h, const int pad_w, const int stride_h,
-    const int stride_w, double* data_im);
+    const int pad_h, const int pad_w, const float stride_h,
+    const float stride_w, double* data_im);
 
 }  // namespace caffe

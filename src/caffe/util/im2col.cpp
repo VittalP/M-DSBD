@@ -48,7 +48,7 @@ template <typename Dtype>
 void col2im_cpu(const Dtype* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
     const int pad_h, const int pad_w,
-    const int stride_h, const int stride_w,
+    const float stride_h, const float stride_w,
     Dtype* data_im) {
   caffe_set(height * width * channels, Dtype(0), data_im);
   int height_col = (height + 2 * pad_h - patch_h) / stride_h + 1;
@@ -73,11 +73,11 @@ void col2im_cpu(const Dtype* data_col, const int channels,
 // Explicit instantiation
 template void col2im_cpu<float>(const float* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
-    const int pad_h, const int pad_w, const int stride_h,
-    const int stride_w, float* data_im);
+    const int pad_h, const int pad_w, const float stride_h,
+    const float stride_w, float* data_im);
 template void col2im_cpu<double>(const double* data_col, const int channels,
     const int height, const int width, const int patch_h, const int patch_w,
-    const int pad_h, const int pad_w, const int stride_h,
-    const int stride_w, double* data_im);
+    const int pad_h, const int pad_w, const float stride_h,
+    const float stride_w, double* data_im);
 
 }  // namespace caffe
